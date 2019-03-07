@@ -1,5 +1,5 @@
 body {
-    background-image: url("./assets/paintbrush.jpg");
+    background-image: url("./assets/panorama.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
@@ -28,6 +28,11 @@ h3, .timer {
     margin: 0;
 }
 
+h1 > span {
+    font-size: 12pt;
+    text-align: right;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -50,6 +55,10 @@ h3, .timer {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+#logo {
+    max-width: 10%;
 }
 
 .site-links {
@@ -94,7 +103,7 @@ h3, .timer {
 }
 
 @media screen and (min-width: 1400px) {
-    .footer { 
+    .footer {
         display: none;
     }
 
