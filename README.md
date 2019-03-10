@@ -1,7 +1,5 @@
-# Maintenance template
+# Page de maintenance pour les sites du Lan ETS
 
-Simple page thrown together when our company had a scheduled platform upgrade. Countdown feature in pure JavaScript. Everything else is plain HTML and CSS. Super simple. :)
+Disponible à: https://maintenance.lanets.ca
 
-In action: 
-
-<img src="https://media.giphy.com/media/4HicC9qMHXCvq3ojMA/giphy.gif" alt="DebtTrader Scheduled Platform Upgrade with countdown" style="width:100%;">
+Activer la page rule dans CloudFlare pour rediriger lanets.ca vers ce site.
