@@ -149,7 +149,6 @@ async function initcountdown() {
         const container = document.getElementById("timer").parentElement;
         container.removeChild(document.getElementById("timer"));
         document.getElementsByClassName("lanets-container")[0].style.fontSize = "3rem";
-        document.getElementsByClassName("lanets-container")[1].style.fontSize = "3rem";
         return;
      }
     startDate = new Date(dataString);
