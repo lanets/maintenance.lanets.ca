@@ -1,48 +1,134 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lan ETS">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@lanets">
+    <meta name="twitter:site" content="@lanets">
+
+    <!-- WEBSITE DESCRIPTION -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="author" content="Lan ETS">
+
+
+    <meta property="og:url" content="https://lanets.ca">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lan ETS">
+    <meta property="og:description" content="The biggest Lan Party of North America's east coast!">
+    <meta property="og:image" content="https://lanets.ca/static/images/general/og_image.png">
+    <meta property="og:video" content="https://lanets.ca/static/images/background/splash2024.mp4">
+    <meta property="og:locale" content="fr_CA">
+    <meta property="og:locale:alternate" content="en_CA">
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
     <link rel="stylesheet" href="./main.css" media="all" />
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <title>Lan ETS | Maintenance</title>
     <link rel="shortcut icon" type="image/png" href="./assets/favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
+
 <body>
-    <div class="logo">
-        <div class="lg-cta">
-            <img id='logo' src="./assets/logo.png" alt="Lan ETS Logo" />
+    <section id="info">
+        <div class="countdown">
+            <div id="timer">
+                <p>T-</p>
+                <p id="days">00</p>
+                <p class="separator">:</p>
+                <p id="hours">00</p>
+                <p class="separator">:</p>
+                <p id="minutes">00</p>
+                <p class="separator">:</p>
+                <p id="seconds">00</p>
+            </div>
+            <p class="lanets">Soon</p>
+            <div class="lanets-container">
+                <p class="lanets">Lan&nbsp;ETS</p>
+                <p class="lanets divider">-</p>
+                <p class="lanets">2025</p>
+            </div>
         </div>
-        <div class="site-links">
-            <a href="https://lanets.ca" title="Lan ETS Home" target="blank">Accueil</a>
-            <a href="https://www.facebook.com/LanETSca" title="Lan ETS Facebook" target="blank">Facebook</a>
-            <a href="https://twitter.com/Lan_ETS" title="Lan ETS Twitter" target="blank">Twitter</a>
-            <a href="mailto:contact@lanets.ca" title="Lan ETS contact" target="_top">Contact</a>
-        </div>
+    </section>
+    <div id='app'>
+        <rocket></rocket>
+        <city></city>
     </div>
-    <div class="main-content">
-        <div class="notice">
-            <h1>
-                Nous serons bientôt de retour.<br>
-                <span>We'll be back soon.</span>
-            </h1>
-            <!-- <h3>More specifically, in:</h3>
-            <div class="countdown">
-                <p class="timer">
-                    <span id="days"></span> Day(s)
-                    <span id="hours"></span> Hour(s)
-                    <span id="minutes"></span > Minute(s)
-                    <span id="seconds"></span> Second(s)
-                </p>
-            </div> -->
-            <h3>Nous effectuons actuellement une maintenance de nos systèmes pour mieux vous servir. Veuillez nous excuser pour le désagrément.</h3>
-            <h3>We are currently performing a scheduled platform upgrade to better serve you. We apologize for any inconvenience.</h3>
+
+    <template id='rocket'>
+        <div class="rocket-wrap" :class="{'fly': flying}">
+            <div class="galaxy">
+                <div v-for="(field, key) in space" :class="key" class="field">
+                    <div v-for="(distanceLayer, key) in field" class="distance-layer" :class="key">
+                        <div v-for="star in distanceLayer" class="star"
+                            :style="'top:'+star.top+'px;left:'+star.left+'px;'"></div>
+                    </div>
+                </div>
+                <div class="moon">
+                    <div class="crater"></div>
+                    <div class="crater-2"></div>
+                    <div class="crater-3"></div>
+                </div>
+                <div class="earth"></div>
+                <div class="mars"></div>
+            </div>
+            <div v-if="counting" class="countdown">
+                <span class="count">{{ countdown }}</span>
+            </div>
+            <div class="rocket">
+                <div class="exhaust-flame"></div>
+                <div class="rocket-body">
+                    <div class="body"></div>
+                    <div class="fin fin-left"></div>
+                    <div class="fin fin-right"></div>
+                    <div class="window"></div>
+                </div>
+            </div>
+
+            <ul class="exhaust-fumes">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-        <div class="footer">
-            <img src="./assets/footer.png" alt="Lan ETS Logo" />
+    </template>
+    <template id="city">
+        <div id="ground-wrap">
+            <div class="buildings">
+                <div v-for="building in buildingsA" class="building" :class="{pointy:building.pointy}"
+                    :style="'height:'+building.height+'px'">
+                    <div class="window-container">
+                        <div v-for="window in building.windows" class="window" :class="{active:window.light}">
+                        </div>
+                    </div>
+                </div>
+                <div class="rocket-gap"></div>
+                <div v-for="building in buildingsB" class="building" :class="{pointy:building.pointy}"
+                    :style="'height:'+building.height+'px'">
+                    <div class="window-container">
+                        <div v-for="window in building.windows" class="window" :class="{active:window.light}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ground"></div>
         </div>
-    </div>
-    <script src="./countdown.js"></script>
+    </template>
 </body>
+<script src="index.js"></script>
+
 </html>
