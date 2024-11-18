@@ -701,9 +701,9 @@
   transform: translateX(-50%);
   margin: 0px;
   background-color: #000;
-  border-radius: 16px;
   padding: 32px;
   color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 .countdown p {
   font-family: "SpaceX";
@@ -725,6 +725,18 @@
   gap: 16px;
   font-size: 20px;
 }
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 24px;
+}
+.socials a {
+  color: #fff;
+  text-decoration: none;
+}
 
 @media screen and (max-width: 768px) {
   #ground-wrap {
@@ -741,11 +753,11 @@
     font-size: 24px;
   }
 
-  .lanets-container{
+  .lanets-container {
     flex-direction: column;
     gap: 0px;
   }
-  .lanets-container .divider{
+  .lanets-container .divider {
     display: none;
   }
 }
