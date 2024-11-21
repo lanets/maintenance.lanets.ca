@@ -1,6 +1,5 @@
 var startDate = new Date("2024-12-23T00:00:00Z");
-var secret = [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1];
-
+var fumes = [];
 
 Vue.component('rocket', {
     template: '#rocket',
@@ -19,6 +18,7 @@ Vue.component('rocket', {
             document.getElementById("ground-wrap").style.display = "none";
         },
         initcountdown() {
+
             const countingdown = setInterval(() => {
                 this.countdown--;
                 if (this.countdown === 0) {
@@ -51,7 +51,9 @@ Vue.component('rocket', {
         }
     },
     mounted() {
+        fumes = document.getElementsByTagName("li")[0].textContent.replaceAll(" ", "0").replaceAll(" ", "1").split("").map(x => x === "1");
         this.$nextTick(() => {
+
             const currentDate = new Date();
             let countdown = Math.floor((startDate - currentDate) / 1000);
             countdown = (countdown - 3) * 1000;
@@ -87,13 +89,13 @@ Vue.component("city", {
                 const building = { height: heightInPx, windows: [], pointy };
                 const windowsCount = floorCount * 3;
                 for (let j = 0; j < windowsCount; j++) {
-                    let isOn = secret.shift();
+                    let isOn = fumes.shift();
                     if (isOn === undefined) {
                         isOn = Math.random() > 0.5;
                     }
-
                     // no light on ground floor
                     if (j >= windowsCount - 3) {
+                        fumes.unshift(isOn);
                         isOn = false;
                     }
                     building.windows.push({ light: isOn });
@@ -107,13 +109,13 @@ Vue.component("city", {
                 const building = { height: heightInPx, windows: [], pointy };
                 const windowsCount = floorCount * 3;
                 for (let j = 0; j < windowsCount; j++) {
-                    let isOn = secret.shift();
+                    let isOn = fumes.shift();
                     if (isOn === undefined) {
                         isOn = Math.random() > 0.5;
                     }
-
                     // no light on ground floor
                     if (j >= windowsCount - 3) {
+                        fumes.unshift(isOn);
                         isOn = false;
                     }
                     building.windows.push({ light: isOn });
@@ -128,7 +130,7 @@ Vue.component("city", {
 })
 
 new Vue({
-    el: '#app'
+    el: '#app',
 });
 
 /**
@@ -150,7 +152,7 @@ async function initcountdown() {
         container.removeChild(document.getElementById("timer"));
         document.getElementsByClassName("lanets-container")[0].style.fontSize = "3rem";
         return;
-     }
+    }
     startDate = new Date(dataString);
 
 
